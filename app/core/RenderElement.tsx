@@ -1,4 +1,8 @@
+import Image from "next/image";
 import { RenderElementProps } from "slate-react";
+import ImageUploadUI from "../features/image/ImageUploadUI";
+import LinkElement from "../features/link/LinkElement";
+import EmbedElement from "../features/embed/EmbedElement";
 
 export const renderElement = (props: RenderElementProps) => {
     const { children, attributes, element } = props;
@@ -18,6 +22,32 @@ export const renderElement = (props: RenderElementProps) => {
             return <h5 {...attributes} className="text-lg font-bold">{children}</h5>
         case "heading-six":
             return <h6 {...attributes} className="text-base font-bold">{children}</h6>
+        case "image":
+            return (
+                <div {...attributes}>
+                    <div contentEditable={false}>
+                        <Image
+                            src={element.url}
+                            style={{ maxWidth: "100%" }}
+                            alt=""
+                        />
+                    </div>
+                    {children}
+                </div>
+            )
+        case "image-upload":
+            return (
+                <div {...attributes}>
+                    <div contentEditable={false}>
+                        <ImageUploadUI element={element} />
+                    </div>
+                    {children}
+                </div>
+            )
+        case "link":
+            return <LinkElement {...props} element={element} />
+        case "embed":
+            return <EmbedElement {...props} element={element} />
         default:
             return <p {...attributes}>{children}</p>
     }

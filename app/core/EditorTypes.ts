@@ -27,7 +27,39 @@ export type HeadingElement = {
   children: CustomText[];
 };
 
-export type CustomElement = ParagraphElement | HeadingElement;
+export type ImageElement = {
+  type: "image";
+  url: string;
+  children: [{ text: "" }];
+};
+
+export type ImageUploadElement = {
+  type: "image-upload";
+  children: [{ text: "" }];
+};
+
+export type LinkElement = {
+  type: "link";
+  url: string;
+  children: CustomText[];
+};
+
+export type EmbedType = "youtube" | "vimeo" | "twitter";
+
+export type EmbedElement = {
+  type: "embed";
+  url: string;
+  embedType: EmbedType;
+  children: [{ text: "" }];
+};
+
+export type CustomElement =
+  | ParagraphElement
+  | HeadingElement
+  | ImageElement
+  | ImageUploadElement
+  | LinkElement
+  | EmbedElement;
 
 declare module "slate" {
   interface CustomTypes {
