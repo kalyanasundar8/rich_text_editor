@@ -1,0 +1,33 @@
+import {
+  AlignCenter,
+  AlignJustify,
+  AlignLeft,
+  AlignRight,
+  Bold,
+  Heading1,
+  Heading2,
+  Heading3,
+  Heading4,
+  Heading5,
+  Heading6,
+  Image,
+  Italic,
+  Underline,
+} from "lucide-react";
+
+export const StandardIcons = {
+  bold: Bold,
+  italic: Italic,
+  underline: Underline,
+  leftAlign: AlignLeft,
+  rightAlign: AlignRight,
+  centerAlign: AlignCenter,
+  justifyAlign: AlignJustify,
+  heading_one: Heading1,
+  heading_two: Heading2,
+  heading_three: Heading3,
+  heading_four: Heading4,
+  heading_five: Heading5,
+  heading_six: Heading6,
+  image: Image,
+};

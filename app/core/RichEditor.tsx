@@ -22,8 +22,21 @@ const RichEditor = () => {
 
     return (
         <Slate editor={editor} initialValue={initialValue}>
+            <div className="px-2">
+                <form action="" className="">
+                    <div>
+                        <input type="text" placeholder="Write title" className="title text-5xl outline-none" />
+                    </div>
+                    <div>
+                        <input type="text" placeholder="Add your description here" className="description outline-none" />
+                    </div>
+                    <div>
+                        <input type="file" />
+                    </div>
+                </form>
+            </div>
             <Toolbar />
-            <Editable renderElement={renderElement} renderLeaf={renderLeaf} />
+            <Editable renderElement={renderElement} renderLeaf={renderLeaf} className="outline-none px-2 mt-4" />
         </Slate>
     )
 }

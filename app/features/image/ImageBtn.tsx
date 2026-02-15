@@ -1,7 +1,12 @@
 import { useSlate } from "slate-react"
 import insertImageUpload from "./InsertImageUpload";
+import { LucideIcon } from "lucide-react";
 
-const ImageBtn = () => {
+type ImageBtnProps = {
+    icon: LucideIcon
+}
+
+const ImageBtn = ({ icon: Icon }: ImageBtnProps) => {
     const editor = useSlate();
 
     const handleClick = (event: React.MouseEvent) => {
@@ -12,8 +17,9 @@ const ImageBtn = () => {
     return (
         <button
             onMouseDown={handleClick}
+            className="flex items-center md:space-x-2 p-1 md:px-2 md:py-1 rounded-md border border-transparent"
         >
-            Image
+            <Icon size={16} />
         </button>
     )
 }

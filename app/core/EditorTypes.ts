@@ -10,6 +10,7 @@ export type CustomText = {
 
 export type ParagraphElement = {
   type: "paragraph";
+  align?: AlignmentType;
   children: CustomText[];
 };
 
@@ -21,9 +22,11 @@ export type HeadingType =
   | "heading-five"
   | "heading-six";
 
+export type AlignmentType = "left" | "center" | "right" | "justify";
+
 export type HeadingElement = {
   type: HeadingType;
-
+  align?: AlignmentType;
   children: CustomText[];
 };
 

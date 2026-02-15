@@ -9,7 +9,9 @@ export const renderElement = (props: RenderElementProps) => {
 
     switch (element.type) {
         case "paragraph":
-            return <p {...attributes}>{children}</p>
+            return <p {...attributes} style={{
+                textAlign: element.align
+            }}>{children}</p>
         case "heading-one":
             return <h1 {...attributes} className="text-4xl font-bold">{children}</h1>
         case "heading-two":
