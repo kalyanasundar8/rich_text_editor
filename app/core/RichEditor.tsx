@@ -22,8 +22,8 @@ const RichEditor = () => {
 
     return (
         <Slate editor={editor} initialValue={initialValue}>
-            <div className="px-2">
-                <form action="" className="">
+            <div className="px-2 mt-5">
+                <form action="" className="space-y-2">
                     <div>
                         <input type="text" placeholder="Write title" className="title text-5xl outline-none" />
                     </div>
@@ -31,12 +31,17 @@ const RichEditor = () => {
                         <input type="text" placeholder="Add your description here" className="description outline-none" />
                     </div>
                     <div>
-                        <input type="file" />
+                        <label htmlFor="thumbnail-upload" className="text-sm">
+                            Upload your review thumbnail
+                        </label>
+                        <input type="file" id="thumbnail-upload" className="hidden" accept="image/*" />
                     </div>
                 </form>
             </div>
-            <Toolbar />
-            <Editable renderElement={renderElement} renderLeaf={renderLeaf} className="outline-none px-2 mt-4" />
+            <div className="mt-10">
+                <Toolbar />
+                <Editable renderElement={renderElement} renderLeaf={renderLeaf} className="outline-none px-2 mt-4" />
+            </div>
         </Slate>
     )
 }

@@ -12,6 +12,7 @@ import {
   Heading6,
   Image,
   Italic,
+  Type,
   Underline,
 } from "lucide-react";
 
@@ -23,6 +24,7 @@ export const StandardIcons = {
   rightAlign: AlignRight,
   centerAlign: AlignCenter,
   justifyAlign: AlignJustify,
+  pargraph: Type,
   heading_one: Heading1,
   heading_two: Heading2,
   heading_three: Heading3,

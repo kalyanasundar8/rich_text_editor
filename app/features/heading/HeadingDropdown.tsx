@@ -7,12 +7,15 @@ import { HeadingType } from "@/app/core/EditorTypes";
 import { StandardIcons } from "@/app/toolbar/StandardIcons";
 import { ChevronDown } from "lucide-react";
 
+type BlockFormat = HeadingType | "paragraph";
+
 type HeadingOption = {
-    format: HeadingType;
+    format: BlockFormat;
     icon: React.ComponentType<{ size?: number }>;
 };
 
 const headingOptions: HeadingOption[] = [
+    { format: "paragraph", icon: StandardIcons.pargraph },
     { format: "heading-one", icon: StandardIcons.heading_one },
     { format: "heading-two", icon: StandardIcons.heading_two },
     { format: "heading-three", icon: StandardIcons.heading_three },
@@ -28,7 +31,8 @@ const HeadingDropdown = () => {
 
     // Get current active heading
     const getActiveHeading = (): string => {
-        const formatMap: Record<HeadingType, string> = {
+        const formatMap: Record<BlockFormat, string> = {
+            "paragraph": "P",
             "heading-one": "H1",
             "heading-two": "H2",
             "heading-three": "H3",
@@ -37,6 +41,7 @@ const HeadingDropdown = () => {
             "heading-six": "H6",
         };
         for (const option of headingOptions) {
+            if (option.format === "paragraph") continue;
             if (isHeadingActive(editor, option.format)) {
                 return formatMap[option.format];
             }
@@ -56,8 +61,18 @@ const HeadingDropdown = () => {
         return () => document.removeEventListener("mousedown", handleClickOutside);
     }, []);
 
-    const handleSelect = (format: HeadingType) => {
-        toggleHeading(editor, format);
+    const handleSelect = (format: BlockFormat) => {
+        if (format === "paragraph") {
+            // Convert to paragraph by toggling off any active heading
+            for (const option of headingOptions) {
+                if (option.format !== "paragraph" && isHeadingActive(editor, option.format)) {
+                    toggleHeading(editor, option.format);
+                    break;
+                }
+            }
+        } else {
+            toggleHeading(editor, format);
+        }
         setIsOpen(false);
     };
 
@@ -79,7 +94,9 @@ const HeadingDropdown = () => {
                 <div className="absolute top-full left-0 mt-1 bg-white border rounded shadow-lg z-10 min-w-[150px]">
                     {headingOptions.map((option) => {
                         const Icon = option.icon;
-                        const isActive = isHeadingActive(editor, option.format);
+                        const isActive = option.format === "paragraph"
+                            ? !headingOptions.some(o => o.format !== "paragraph" && isHeadingActive(editor, o.format))
+                            : isHeadingActive(editor, option.format);
 
                         return (
                             <button

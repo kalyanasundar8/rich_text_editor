@@ -15,6 +15,7 @@ export type ParagraphElement = {
 };
 
 export type HeadingType =
+  | "paragraph"
   | "heading-one"
   | "heading-two"
   | "heading-three"
